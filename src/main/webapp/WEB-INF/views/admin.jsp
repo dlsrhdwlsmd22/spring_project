@@ -16,6 +16,31 @@
 	
 	<c:if test="${param.menu == 1}">
 		<h5>회원관리</h5>
+		
+		<table border="1">
+		<tr>
+			<th>이미지</th>
+			<th>아이디</th>
+			<th>암호</th>
+			<th>이름</th>
+			<th>나이</th>
+			<th>날짜</th>	
+		</tr>
+		
+		<c:forEach var="vo" items="${list}">
+		<tr>
+			<td>
+
+			<img src="memberimg.do?id=${vo.mem_id}" width="50px" height="50px" />
+			</td>
+			<td>${vo.mem_id}</td>
+			<td>${vo.mem_pw}</td>
+			<td>${vo.mem_name}</td>
+			<td>${vo.mem_age}</td>
+			<td>${vo.mem_date}</td>	
+		</tr>
+		</c:forEach>
+	</table>
 	</c:if>
 	
 	<c:if test="${param.menu == 2}">
@@ -96,6 +121,8 @@
 			},'json');
 
 		});
+			
+
 	</script>
 </body>
 </html>

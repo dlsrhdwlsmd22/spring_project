@@ -23,7 +23,11 @@
 		<result property="BRD_CONTENT" column="BRD_CONTENT" jdbcType="CLOB" javaType="java.lang.String" />
 	</resultMap>
 	<select id="selectBoardOne" parameterType="int" resultMap="result1">
-		SELECT * FROM BOARD WHERE BRD_NO=#{no}
+		SELECT 
+			BRD_NO, BRD_TITLE, 
+			BRD_CONTENT, BRD_WRITER
+			BRD_HIT, TO_CHAR(BRD_DATE, 'YYYY-MM-DD') BRD_DATE 
+		FROM BOARD WHERE BRD_NO=#{no}
 	</select>
 	
 	<update id="updateBoardHit" parameterType="int">

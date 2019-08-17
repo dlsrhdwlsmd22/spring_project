@@ -7,6 +7,54 @@
 	</insert>
 	
 	<select id="selectBoardList" resultType="map">
-		SELECT * FROM BOARD
+		SELECT 
+			BRD_NO, 
+			BRD_TITLE, 
+			BRD_WRITER, 
+			BRD_HIT, 
+			BRD_DATE 
+		FROM 
+			BOARD  
+		ORDER BY BRD_NO DESC
 	</select>
+
+	
+	<resultMap id="result1" type="map">
+		<result property="BRD_CONTENT" column="BRD_CONTENT" jdbcType="CLOB" javaType="java.lang.String" />
+	</resultMap>
+	<select id="selectBoardOne" parameterType="int" resultMap="result1">
+		SELECT BRD_NO, BRD_TITLE, BRD_CONTENT, BRD_WRITER,BRD_HIT, TO_CHAR(BRD_DATE, 'YYYY"년 "MM"월 "DD"일"') BRD_DATE FROM BOARD WHERE BRD_NO=#{no}
+	</select>
+	
+	<update id="updateBoardHit" parameterType="int">
+		UPDATE BOARD SET BRD_HIT=BRD_HIT+1 WHERE BRD_NO=#{no}
+	</update>
+	
+	<select id="selectBoardPrev" parameterType="int" resultType="int">
+		<![CDATA[
+		SELECT NVL(MAX(BRD_NO),0) FROM BOARD WHERE BRD_NO < #{no}
+		]]>
+	</select>
+
+	<select id="selectBoardNext" parameterType="int" resultType="int">
+		<![CDATA[
+		SELECT NVL(MIN(BRD_NO),0) FROM BOARD WHERE BRD_NO > #{no}
+		]]>
+	</select>
+	
+	<delete id="deleteBoardOne" parameterType="int">
+		DELETE FROM BOARD WHERE BRD_NO = #{no}
+	</delete>
+	
+	<update id="updateBoardOne" parameterType="map">
+		UPDATE 
+			BOARD 
+		SET 
+			BRD_TITLE=#{title}, 
+			BRD_CONTENT=#{content}, 
+			BRD_WRITER=#{writer}
+		WHERE 
+			BRD_NO=#{no}
+	</update>
+
 </mapper>
