@@ -1,5 +1,6 @@
 package com.sts.web;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,9 +72,10 @@ public class BoardController {
 	
 	@RequestMapping(value="/boardw.do", method = RequestMethod.POST)
 	public String boardwrite(
-			@RequestParam("title") String a,
-			@RequestParam("content") String b,
-			@RequestParam("writer") String c) {
+			@RequestParam("name") String a,
+			@RequestParam("item") String b,
+			@RequestParam("image") File c,
+			@RequestParam("content") String d) {
 		//insert, update, delete  => INT(0 또는 1), select,
 		//DB에 추가함. : DAO로 전달함. -> DAO가 mapper로 전달함 -> mapper SQL문을 수행
  		
@@ -81,6 +83,7 @@ public class BoardController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("TI", a);
 		map.put("CO", b);
+		map.put("WR", c);
 		map.put("WR", c);
 		
 		int ret = bDAO.insertBoardOne( map );

@@ -20,4 +20,7 @@
 	<select id="selectMemberImg" parameterType="String" resultMap="result1">
 		SELECT MEM_IMG FROM MEMBER WHERE MEM_ID=#{id}
 	</select> -->
+	<select id="selectMemberLogin" parameterType="map" resultType="map">
+		SELECT mem_id, mem_name FROM SHOP_MEMBER WHERE id=#{mem_id} AND pw=#{mem_pw}
+	</select>
 </mapper>

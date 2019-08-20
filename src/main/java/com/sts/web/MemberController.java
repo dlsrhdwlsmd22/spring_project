@@ -42,7 +42,6 @@ public class MemberController {
 		}
 	}
 	
-	@ModelAttribute
 	@RequestMapping(value="/join.do", method = RequestMethod.GET)
 	public ModelAndView join(Model model, HttpSession httpSession) {
 		//view파일명, 명칭, view에서 값을 보관할 vo
